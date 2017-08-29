@@ -1,0 +1,25 @@
+#!/usr/bin/nodejs
+var debug = require('debug')('my-application');
+var app = require('../app');
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+
+/*
+Conexion a mongoose
+*/
+
+mongoose.connect('mongodb://localhost/pizzapp', {
+  useMongoClient: true
+});
+
+mongoose.connection.on('open', function(err) {
+  if (err)
+    debug("No se ha podido conectar a la base de datos");
+  else
+    debug("Conexion establecida a la base de datos");
+});
+app.set('port', process.env.PORT || 3000);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});

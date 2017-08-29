@@ -1,0 +1,22 @@
+extends layout
+
+block head
+  -var menuActive = 'index'
+  
+block content
+  .container
+    .row.margin-top
+    .grid
+      h3(class='sub-heading thumbs')  Nuestras Pizzas
+      if pizzas
+          each pizza in pizzas
+            .col-md-6.thumbs
+              figure.effect-bubba.wow.fadeIn.animated(data-wow-delay='0.1s', style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;')
+                a(href='img/photo-a.jpg')
+                  img(src=pizza.image, alt='')
+                  figcaption
+                    h2 #{pizza.title} 
+                      span #{pizza.subtitle}
+                    p #{pizza.description}
+                if user 
+                  a(class="btn btn-default", href="/order?pizza=#{pizza._id}" style="position: relative; top: 0; z-index:99") Pedir

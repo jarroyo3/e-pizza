@@ -1,0 +1,35 @@
+extends layout
+
+block head
+  -var menuActive = 'login'
+
+block content
+  div.container
+    div.row.margin-top
+      .col-md-6
+        .contact-header Registro
+        if errors
+            include ./errors
+            
+        form#loginForm(method="POST", action='/user/register')
+          .control-group.form-group
+            .controls
+              label(for="inputName") Nombre:
+              input#inputName.form-control(type='text', placeholder='Nombre.', name='name')
+          .control-group.form-group
+            .controls
+              label(for="inputLastname") Apellidos:
+              input#inputLastname.form-control(type='text', placeholder='Apellidos.', name='lastname')          
+          .control-group.form-group
+            .controls
+              label(for="inputEmail") Email:
+              input#inputUser.form-control(type='text', placeholder='Introduce tu usuario.', name='email')          
+          .control-group.form-group
+            .controls
+              label(for="inputPassword") Contraseña:
+              input#password.form-control(type='password',placeholder='Contraseña.', name='password')
+          .control-group.form-group
+            .controls
+              label(for="inputPasswordConfirmation") Confirmar contraseña:
+              input#password.form-control(type='password',placeholder='Confirmar contraseña.', name='password_confirmation')
+          button.contact-btn.btn(type='submit') Registrarme

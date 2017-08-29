@@ -1,0 +1,52 @@
+extends layout
+
+block head
+  -var menuActive = 'about'
+
+block content
+  header.about-us-banner
+    .container
+      .row
+        .col-md-12
+          h2.main-text.wow.fadeIn
+            | Monday - Saturday: 9AM – 10PM
+          .hr-inner
+  // /about us banner
+  // About us
+  .container
+    .row.margin-top
+      // Box1
+      .col-md-6.col-sm-6
+        .panel-default.wow.fadeIn(data-wow-delay='0.1s')
+          img(src='img/photo-about.jpg', alt='photo')
+      // /box1
+      // Box2
+      .col-md-6.col-sm-6
+        p.inner-text
+          | The first Italian pizza in America was introduced in Chicago by the street peddlers who walked up and down Taylor Street and sold the hot slices of Pizzas to the pedestrians. They maintained the heat of the slices by holding them in cylindrical drums that had a compartment which was filled with hot charcoal.
+        p
+          | The first Italian pizza in America was introduced in Chicago by the street peddlers who walked up and down Taylor Street and sold the hot slices of Pizzas to the pedestrians. They maintained the heat of the slices by holding them in cylindrical drums that had a compartment which was filled with hot charcoal.
+        p
+          | The first Italian pizza in America was introduced in Chicago by the street peddlers who walked up and down Taylor Street and sold the hot slices of Pizzas to the pedestrians. They maintained the heat of the slices by holding them in cylindrical drums that had a compartment which was filled with hot charcoal.
+        p
+          | The first Italian pizza in America was introduced in Chicago by the street peddlers who walked up and down Taylor Street and sold the hot slices of Pizzas to the pedestrians. They maintained the heat of the slices by holding them in cylindrical drums that had a compartment which was filled with hot charcoal.
+        p
+          | The pizza from which almost all designs are based was created in the 1889 by the hands of the famous Naples chef Raffaele Esposito who made three pizzas for the King and Queen of Italy.
+      // /box2
+      // Box3
+      .col-md-4.col-sm-4
+        .panel-default
+          img(src='img/photo-about1.jpg', alt='photo')
+      // /box3
+      // Box4
+      .col-md-4.col-sm-4
+        .panel-default
+          img(src='img/photo1.gif', alt='photo')
+      // /box4
+      // Box5
+      .col-md-4.col-sm-4
+        .panel-default
+          img(src='img/photo-about3.jpg', alt='photo')
+      // /box5
+    // /row
+    .margin-bottom

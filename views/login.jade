@@ -1,0 +1,26 @@
+extends layout
+
+block head
+  -var menuActive = 'login'
+
+block content
+  div.container
+    div.row.margin-top
+      .col-md-6
+        .contact-header Inicio de sesión
+        if errors
+            include ./errors
+        form#loginForm(method="POST", action='/user/auth')
+          .control-group.form-group
+            .controls
+              label(for="inputEmail") Email:
+              input#inputUser.form-control(type='text', placeholder='Introduce tu usuario.', name='email')
+          .control-group.form-group
+            .controls
+              label(for="inputPassword") Password:
+              input#password.form-control(type='password',placeholder='Contraseña.', name='password')
+          #success
+          .col-lg-12
+            p ¿No tienes cuenta? 
+              a(href='/user/register') Registrate
+          button.contact-btn.btn(type='submit') Iniciar sesión

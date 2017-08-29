@@ -1,0 +1,20 @@
+extends layout
+
+block head
+  
+h1 Realiza tu pedido
+block content
+  .container
+    .row.margin-top
+    .grid
+      h3(class='sub-heading thumbs')  ¡Gracias por tu pedido!
+      if order
+          .col-md-12.thumbs
+            h4 ID del pedido: #{order.id}
+            h4 Pizza: #{order.pizza}
+            if order.comments
+              h4 Comentarios en el pedido: #{order.comments}
+            h4 Usuario: #{order.customer.name} #{order.customer.lastname}
+            h4 Hora del pedido: #{order.order_date}
+            h4 Estado del pedido: #{order.state}
+  
