@@ -2,29 +2,34 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user.model');
+var Order = require('../models/order.model');
 
-function ensureAdmin(req, res, next){
-  if (req.user) {
-    if (req.user.isAdmin)
-      return next();
-    else
-      return res.send(401, 'Unauthorized');
-  }
-  return next();
+function isAdminAuthenticated(req, res, next) {
+  if (req.isAuthenticated() && req.user.isAdmin)
+   return next();
+   var errors = req.flash('error');
+   if (errors.length) {
+     res.render('admin/admin-login', {errors: errors});
+   }
+   return res.render('admin/admin-login');
 }
 
-router.get('/', ensureAdmin, function(req, res) {
-  if (req.user)
-    res.render('admin/admin-index');
-  else res.redirect('/admin/login');
+router.get('/', function(req, res) {
+  res.redirect('/admin/login');
 });
 
-router.get('/login', function(req, res) {
-  var errors = req.flash('error');
-  if (errors.length) {
-     res.render('admin/admin-login', {errors: errors});
-  }
-  res.render('admin/admin-login');
+router.get('/login', isAdminAuthenticated, function(req, res) {
+  res.redirect('/admin/orders');
+});
+
+router.get('/orders', function(req, res) {
+    Order.find({})
+    .populate('customer')
+    .exec(function(err, orders){
+      if (err) throw err;
+      res.render('admin/admin-orders', {orders: orders});
+    })
+
 });
 
 var passportAdminAuth = passport.authenticate('local', {

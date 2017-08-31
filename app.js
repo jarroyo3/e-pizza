@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*function ensureAuthenticated(req, res, next) {
+function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     console.log('sssss');
     return next();
@@ -39,7 +39,7 @@ function ensureAdmin(req, res, next) {
   } else {
     return res.send(401, 'Unauthorized');
   }
-}*/
+}
 
 app.use(session({
     secret: 'mysecretkeypass',

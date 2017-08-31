@@ -1,0 +1,25 @@
+extends admin-layout
+block content
+  .row
+    div(class="col-xs-10 col-md-10 col-sm-10 col-lg-10")
+      h3 Pedidos de clientes
+      table.table
+        thead
+          tr
+            th Usuario:
+            th Fecha:
+            th Estado del pedido
+            th Comentarios del cliente
+            th Cambiar estado
+        tbody
+            each order in orders
+              tr 
+                td #{order.customer.name} #{order.customer.lastname} 
+                td #{order.order_date}
+                td #{order.state}
+                td #{order.comments}
+                td 
+                  a Pendiente 
+                  a Preparacion 
+                  a Listo 
+        
