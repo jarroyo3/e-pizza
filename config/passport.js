@@ -25,7 +25,7 @@ passport.use(new LocalStrategy({
       if (!user || (user.password != password)) {
         return done(null, false, { message: 'Email o contraseña incorrectos.' });
       }
-      return done(null, _.pick(user, 'name', 'lastname', 'email', '_id'));
+      return done(null, _.pick(user, 'name', 'lastname', 'email', '_id', 'isAdmin'));
     });
   }
 ));

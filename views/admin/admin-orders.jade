@@ -12,14 +12,20 @@ block content
             th Comentarios del cliente
             th Cambiar estado
         tbody
-            each order in orders
+          each order in orders
               tr 
-                td #{order.customer.name} #{order.customer.lastname} 
-                td #{order.order_date}
-                td #{order.state}
-                td #{order.comments}
-                td 
-                  a Pendiente 
-                  a Preparacion 
-                  a Listo 
-        
+                  td #{order.customer.name} #{order.customer.lastname} 
+                  td #{order.order_date}
+                  td 
+                    span.badge #{order.state}
+                  td #{order.comments}
+                  td 
+                    form(method="post" action="/admin/orders/updateOrderStatus")
+                      input(type="hidden", name="idOrder", value="#{order._id}")
+                      select(name="orderStatus")
+                        each state in status
+                          if order.state == state
+                            option(value="#{state}", selected="selected") #{state}
+                          else
+                            option(value="#{state}") #{state}
+                      button Actualizar estado

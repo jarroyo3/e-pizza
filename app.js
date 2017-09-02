@@ -24,23 +24,6 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    console.log('sssss');
-    return next();
-  }
-
-  return res.render('admin/admin-login');
-}
-
-function ensureAdmin(req, res, next) {
-  if (req.user.isAdmin) {
-    return next();
-  } else {
-    return res.send(401, 'Unauthorized');
-  }
-}
-
 app.use(session({
     secret: 'mysecretkeypass',
     name: 'pizzapp',
@@ -59,7 +42,7 @@ app.use(flash());
 app.use('/', routes);
 app.use('/user', users);
 app.use('/about', about);
-app.use('/admin', /*ensureAuthenticated, ensureAdmin,*/ require('./routes/admin'));
+app.use('/admin', require('./routes/admin'));
 app.use('/order', require('./routes/orders'));
 
 /// catch 404 and forwarding to error handler

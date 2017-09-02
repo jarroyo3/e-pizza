@@ -22,13 +22,33 @@ router.get('/login', isAdminAuthenticated, function(req, res) {
   res.redirect('/admin/orders');
 });
 
-router.get('/orders', function(req, res) {
+router.get('/orders', isAdminAuthenticated, function(req, res) {
     Order.find({})
     .populate('customer')
     .exec(function(err, orders){
       if (err) throw err;
-      res.render('admin/admin-orders', {orders: orders});
+      var adminUser = null;
+      if (req.user) {
+        adminUser = req.user;
+      }
+      var status = [
+        'pendiente',
+        'sirviendo',
+        'listo'
+      ];
+      res.render('admin/admin-orders', {adminUser: adminUser, orders: orders, status: status});
     })
+
+});
+
+router.post('/orders/updateOrderStatus', isAdminAuthenticated, function(req, res) {
+  var idOrder = req.body.idOrder;
+  var newOrderStatus = req.body.orderStatus;
+  Order.update({_id: idOrder}, {"$set": {state: newOrderStatus}})
+  .exec(function(err, order){
+    if (err) throw err;
+    res.redirect('/admin/orders');
+  })
 
 });
 
