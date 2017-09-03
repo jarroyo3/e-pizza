@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user.model');
-var id = 0;
 
 /* GET users listing. */
 router.get('/', function(req, res) {

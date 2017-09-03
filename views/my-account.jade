@@ -1,0 +1,17 @@
+extends layout
+
+block head
+  -var menuActive = 'my-account'
+
+block content
+  div.container
+    div.row.margin-top
+      .col-md-12
+        .contact-header Mi cuenta
+        if errors
+            include ./errors
+        .row
+          .col-xs-12.col-sm-6.col-lg-4
+            ul
+              li
+                a(href="/account/address") Añadir direccion

@@ -38,9 +38,9 @@ app.use(passport.session());
 
 app.use(flash());
 
-
 app.use('/', routes);
 app.use('/user', users);
+app.use('/account', require('./routes/account'));
 app.use('/about', about);
 app.use('/admin', require('./routes/admin'));
 app.use('/order', require('./routes/orders'));

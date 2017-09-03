@@ -14,13 +14,19 @@ function isAdminAuthenticated(req, res, next) {
    return res.render('admin/admin-login');
 }
 
-router.get('/', function(req, res) {
-  res.redirect('/admin/login');
+router.get('/', isAdminAuthenticated, function(req, res) {
+  res.redirect('/admin/orders');
 });
 
 router.get('/login', isAdminAuthenticated, function(req, res) {
   res.redirect('/admin/orders');
 });
+
+router.get('/logout', function(req, res) {
+  console.log('entra');
+  req.logout();
+  res.redirect('/admin');
+})
 
 router.get('/orders', isAdminAuthenticated, function(req, res) {
     Order.find({})
@@ -51,6 +57,7 @@ router.post('/orders/updateOrderStatus', isAdminAuthenticated, function(req, res
   })
 
 });
+
 
 var passportAdminAuth = passport.authenticate('local', {
   failureRedirect: '/admin/login',

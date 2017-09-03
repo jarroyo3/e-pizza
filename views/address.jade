@@ -1,0 +1,40 @@
+extends layout
+
+block head
+  -var menuActive = 'address'
+
+block content
+  div.container
+    div.row.margin-top
+      .col-md-6
+        .contact-header Añadir Dirección
+        if errors
+            include ./errors
+        
+        if success
+          .alert.alert-success #{success.message}
+        
+        form#loginForm(method="POST", action='/account/newAddress')
+          .control-group.form-group
+            .controls
+              label(for="inputAlias") Alias:
+              input#inputUser.form-control(type='text', placeholder='Alias.', name='alias')
+          .control-group.form-group
+            .controls
+              label(for="inputAddress") Dirección:
+              input#password.form-control(type='text',placeholder='Dirección.', name='address')
+          .control-group.form-group
+            .controls
+              label(for="inputCity") Ciudad:
+              input#inputUser.form-control(type='text', placeholder='Ciudad.', name='city')
+          .control-group.form-group
+            .controls
+              label(for="inptuPostcode") Código postal:
+              input#inputUser.form-control(type='text', placeholder='Código postal.', name='postcode')
+          .control-group.form-group
+            .controls
+              label(for="inptuPhone") Telefono:
+              input#inputUser.form-control(type='phone', placeholder='Teléfono.', name='phone')
+          
+          button.contact-btn.btn(type='submit') Añadir Dirección
+          a(href='/account', class='btn contact-btn', style="margin-left: 2px") Volver
